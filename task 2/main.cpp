@@ -1,9 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-
+#include<bits/stdc++.h>
 #include <windows.h>
 #include <glut.h>
+
+using namespace std;
 
 #define pi (2*acos(0.0))
 
@@ -166,33 +165,76 @@ void drawSphere(double radius,int slices,int stacks)
 	}
 }
 
+double a = 120;
+point pos;
+point v;
+double f1 = 10.0;
+double f2 = 0.05;
+point perp;
+double ang = 10.0;
+
 
 void drawSS()
 {
-    glColor3f(1,0,0);
-    drawSquare(20);
+//    glColor3f(1,0,0);
+//    drawSquare(20);
+//
+//    glRotatef(angle,0,0,1);
+//    glTranslatef(110,0,0);
+//    glRotatef(2*angle,0,0,1);
+//    glColor3f(0,1,0);
+//    drawSquare(15);
+//
+//    glPushMatrix();
+//    {
+//        glRotatef(angle,0,0,1);
+//        glTranslatef(60,0,0);
+//        glRotatef(2*angle,0,0,1);
+//        glColor3f(0,0,1);
+//        drawSquare(10);
+//    }
+//    glPopMatrix();
+//
+//    glRotatef(3*angle,0,0,1);
+//    glTranslatef(40,0,0);
+//    glRotatef(4*angle,0,0,1);
+//    glColor3f(1,1,0);
+//    drawSquare(5);
 
-    glRotatef(angle,0,0,1);
-    glTranslatef(110,0,0);
-    glRotatef(2*angle,0,0,1);
-    glColor3f(0,1,0);
-    drawSquare(15);
-
-    glPushMatrix();
+    glBegin(GL_LINES);
     {
-        glRotatef(angle,0,0,1);
-        glTranslatef(60,0,0);
-        glRotatef(2*angle,0,0,1);
-        glColor3f(0,0,1);
-        drawSquare(10);
+        glVertex3f(a,a,0);
+        glVertex3f(a,-a,0);
     }
-    glPopMatrix();
+    glEnd();
 
-    glRotatef(3*angle,0,0,1);
-    glTranslatef(40,0,0);
-    glRotatef(4*angle,0,0,1);
-    glColor3f(1,1,0);
-    drawSquare(5);
+    glBegin(GL_LINES);
+    {
+        glVertex3f(a,a,0);
+        glVertex3f(-a,a,0);
+    }
+    glEnd();
+
+    glBegin(GL_LINES);
+    {
+        glVertex3f(-a,a,0);
+        glVertex3f(-a,-a,0);
+    }
+    glEnd();
+
+    glBegin(GL_LINES);
+    {
+        glVertex3f(-a,-a,0);
+        glVertex3f(a,-a,0);
+    }
+    glEnd();
+
+    glBegin(GL_LINES);
+    {
+        glVertex3f(pos.x, pos.y, pos.z);
+        glVertex3f(pos.x + v.x * f1, pos.y + v.y * f1, pos.z + v.z * f1);
+    }
+    glEnd();
 }
 
 void keyboardListener(unsigned char key, int x,int y){
@@ -207,6 +249,11 @@ void keyboardListener(unsigned char key, int x,int y){
 	}
 }
 
+double toRad(double f)
+{
+    return 2.0 * pi * f;
+}
+
 
 void specialKeyListener(int key, int x,int y){
 	switch(key){
@@ -219,9 +266,17 @@ void specialKeyListener(int key, int x,int y){
 
 		case GLUT_KEY_RIGHT:
 			cameraAngle += 0.03;
+
+            v.x = v.x * cos(pi/60) - v.y * sin(pi/60);
+            v.y = v.y * cos(pi/60.0) + v.x * sin(pi/60.0);
+
 			break;
 		case GLUT_KEY_LEFT:
 			cameraAngle -= 0.03;
+
+            v.x = v.x * cos(-pi/60.0) - v.y * sin(-pi/60.0);
+            v.y = v.y * cos(-pi/60.0) + v.x * sin(-pi/60.0);
+
 			break;
 
 		case GLUT_KEY_PAGE_UP:
@@ -326,13 +381,27 @@ void display(){
 void animate(){
 	angle+=0.05;
 	//codes for any changes in Models, Camera
+	pos.x += v.x * f2;
+	pos.y += v.y * f2;
+	pos.z += v.z * f2;
+
+	if(pos.x >= a  ||  pos.x <= -a)
+    {
+        v.x = -v.x;
+    }
+
+    if(pos.y >= a  ||  pos.y <= -a)
+    {
+        v.y = -v.y;
+    }
+
 	glutPostRedisplay();
 }
 
 void init(){
 	//codes for initialization
 	drawgrid=0;
-	drawaxes=1;
+	drawaxes=0;
 	cameraHeight=150.0;
 	cameraAngle=1.0;
 	angle=0;
@@ -355,6 +424,15 @@ void init(){
 	//aspect ratio that determines the field of view in the X direction (horizontally)
 	//near distance
 	//far distance
+
+	pos.x = 0.0;
+    pos.y = 0.0;
+    pos.z = 0.0;
+
+    v.x = 1.0/sqrt(2.0);
+    v.y = 1.0/sqrt(2.0);
+    v.z = 0.0;
+
 }
 
 int main(int argc, char **argv){

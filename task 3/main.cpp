@@ -25,14 +25,14 @@ void drawAxes()
 	{
 		glColor3f(1.0, 1.0, 1.0);
 		glBegin(GL_LINES);{
-			glVertex3f( 100,0,0);
-			glVertex3f(-100,0,0);
+			glVertex3f( 150,0,0);
+			glVertex3f(-150,0,0);
 
-			glVertex3f(0,-100,0);
-			glVertex3f(0, 100,0);
+			glVertex3f(0,-150,0);
+			glVertex3f(0, 150,0);
 
-			glVertex3f(0,0, 100);
-			glVertex3f(0,0,-100);
+			glVertex3f(0,0, 150);
+			glVertex3f(0,0,-150);
 		}glEnd();
 	}
 }
@@ -167,41 +167,152 @@ void drawSphere(double radius,int slices,int stacks)
 }
 
 
+double r1 = 8;
+double r2 = 8;
+double r3 = 10;
+
+double r4 = 5;
+
+double s1 = 5;
+double s2 = 3;
+double s3 = 2;
+
+double rot1 = 0.0;
+double rot2 = 0.0;
+double rot3 = 0.0;
+double rot4 = 0.0;
+double rot5 = 0.0;
+double rot6 = 0.0;
+
 void drawSS()
 {
-    glColor3f(1,0,0);
-    drawSquare(20);
+//    glColor3f(1,0,0);
+//    drawSquare(20);
+//
+//    glRotatef(angle,0,0,1);
+//    glTranslatef(110,0,0);
+//    glRotatef(2*angle,0,0,1);
+//    glColor3f(0,1,0);
+//    drawSquare(15);
+//
+//    glPushMatrix();
+//    {
+//        glRotatef(angle,0,0,1);
+//        glTranslatef(60,0,0);
+//        glRotatef(2*angle,0,0,1);
+//        glColor3f(0,0,1);
+//        drawSquare(10);
+//    }
+//    glPopMatrix();
+//
+//    glRotatef(3*angle,0,0,1);
+//    glTranslatef(40,0,0);
+//    glRotatef(4*angle,0,0,1);
+//    glColor3f(1,1,0);
+//    drawSquare(5);
 
-    glRotatef(angle,0,0,1);
-    glTranslatef(110,0,0);
-    glRotatef(2*angle,0,0,1);
-    glColor3f(0,1,0);
-    drawSquare(15);
+
+    //arekta rotate
+    glRotatef(rot2,1,0,0);
+    glRotatef(rot1,0,1,0);
+    glTranslatef(0,0,-s1*r1);
+    glScalef(1,1,s1);
+    glutWireSphere(r1,12,10);
+    glScalef(1,1,1.0/s1);
+
+    glTranslatef(0,0,-s1*r1);
+    glRotatef(rot3,0,1,0);
+    glTranslatef(0,0,-s2*r2);
+
+    glScalef(1,1,s2);
+    glutWireSphere(r2,11,9);
+    glScalef(1,1,1/s2);
+
+    glRotatef(rot4,0,0,1);
+    glBegin(GL_TRIANGLES);{
+        float temp = -s2*r2;
+        //float temp = 0;
+        glVertex3f(0,0,temp);
+        glVertex3f(0,r3,temp-r3);
+        glVertex3f(0,-r3,temp-r3);
+    }
+    glEnd();
+
+    glTranslatef(0,0,-s2*r2-r3);
 
     glPushMatrix();
     {
-        glRotatef(angle,0,0,1);
-        glTranslatef(60,0,0);
-        glRotatef(2*angle,0,0,1);
-        glColor3f(0,0,1);
-        drawSquare(10);
+        glTranslatef(0,r3,0);
+        glTranslatef(0,0,-r4*s3);
+        glRotatef(rot5,0,0,1);
+        glScalef(1,1,s3);
+        glutWireSphere(r4,10,7);
     }
     glPopMatrix();
 
-    glRotatef(3*angle,0,0,1);
-    glTranslatef(40,0,0);
-    glRotatef(4*angle,0,0,1);
-    glColor3f(1,1,0);
-    drawSquare(5);
+    glPushMatrix();
+    {
+        glTranslatef(0,-r3,0);
+        glRotatef(rot6,0,1,0);
+        glTranslatef(0,0,-r4*s3);
+        glScalef(1,1,s3);
+        glutWireSphere(r4,10,7);
+    }
+    glPopMatrix();
 }
 
 void keyboardListener(unsigned char key, int x,int y){
 	switch(key){
 
 		case '1':
-			drawgrid=1-drawgrid;
+			//drawgrid=1-drawgrid;
+			if(rot1 <= 40)
+                rot1 += 5.0;
 			break;
-
+        case '2':
+            if(rot1 >= -40)
+                rot1 -= 5.0;
+            break;
+        case 'q':
+            if(rot2 <= 85)
+                rot2 += 5.0;
+            break;
+        case 'w':
+            if(rot2 >= 5.0)
+                rot2 -= 5.0;
+            break;
+        case '3':
+			if(rot3 <= 40)
+                rot3 += 5.0;
+			break;
+        case '4':
+            if(rot3 >= 5.0)
+                rot3 -= 5.0;
+            break;
+        case '5':
+			if(rot4 <= 85)
+                rot4 += 5.0;
+			break;
+        case '6':
+            if(rot4 >= 5.0)
+                rot4 -= 5.0;
+            break;
+        case '7':
+			if(rot5 <= 85)
+                rot5 += 5.0;
+			break;
+        case '8':
+            if(rot5 >= 5.0)
+                rot5 -= 5.0;
+            break;
+        case '9':
+			if(rot6 <= 85)
+                rot6 += 5.0;
+			break;
+        case '0':
+            if(rot6 >= 5.0)
+                rot6 -= 5.0;
+            break;
 		default:
 			break;
 	}
@@ -288,8 +399,8 @@ void display(){
 	//3. Which direction is the camera's UP direction?
 
 	//gluLookAt(100,100,100,	0,0,0,	0,0,1);
-	//gluLookAt(200*cos(cameraAngle), 200*sin(cameraAngle), cameraHeight,		0,0,0,		0,0,1);
-	gluLookAt(0,0,200,	0,0,0,	0,1,0);
+	gluLookAt(200*cos(cameraAngle), 200*sin(cameraAngle), cameraHeight,		0,0,0,		0,0,1);
+	//gluLookAt(0,0,200,	0,0,0,	0,1,0);
 
 
 	//again select MODEL-VIEW

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1524291747 source:c:\users\sabit\desktop\opengl\task 3\main.cpp
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<windows.h>
+	<glut.h>
+
+1392007564 c:\users\sabit\desktop\opengl\task 3\opengl\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
