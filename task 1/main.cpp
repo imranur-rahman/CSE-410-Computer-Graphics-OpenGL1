@@ -503,17 +503,18 @@ void specialKeyListener(int key, int x,int y){
 			break;
 
 		case GLUT_KEY_HOME:
-		    if(a < max_a)
+		    if(a < max_a - amountToBeIncreased)
             {
-                a += 2 * amountToBeIncreased;
+                a += amountToBeIncreased;
                 r -= amountToBeIncreased;
             }
 			break;
 		case GLUT_KEY_END:
-		    if(2 * r < max_a)
+		    //if(2 * r < max_a)
+		    if(a > amountToBeIncreased)
             {
                 r += amountToBeIncreased;
-                a -= 2 * amountToBeIncreased;
+                a -= amountToBeIncreased;
             }
 			break;
 
