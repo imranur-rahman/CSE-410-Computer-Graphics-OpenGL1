@@ -172,6 +172,7 @@ double f1 = 10.0;
 double f2 = 0.05;
 point perp;
 double ang = 10.0;
+double f3 = 3.0;
 
 
 void drawSS()
@@ -229,10 +230,23 @@ void drawSS()
     }
     glEnd();
 
+    point end = {pos.x + v.x * f1, pos.y + v.y * f1, pos.z + v.z * f1};
+
     glBegin(GL_LINES);
     {
         glVertex3f(pos.x, pos.y, pos.z);
-        glVertex3f(pos.x + v.x * f1, pos.y + v.y * f1, pos.z + v.z * f1);
+        glVertex3f(end.x, end.y, end.z);
+    }
+    glEnd();
+
+    point perpVector = {-v.y, v.x, v.z};
+
+    glBegin(GL_TRIANGLES);
+    {
+        //glColor3f(1,0,0);
+        glVertex3f(end.x, end.y, end.z);
+        glVertex3f(end.x - v.x * f3 + perpVector.x * f3, end.y - v.y * f3 + perpVector.y * f3, end.z - v.z * f3 + perpVector.z * f3);
+        glVertex3f(end.x - v.x * f3 - perpVector.x * f3, end.y - v.y * f3 - perpVector.y * f3, end.z - v.z * f3 - perpVector.z * f3);
     }
     glEnd();
 }
