@@ -69,12 +69,12 @@ void drawGrid()
 
 void drawSquare(double a)
 {
-    //glColor3f(1.0,0.0,0.0);
+    glColor3f(1.0,0.0,0.0);
 	glBegin(GL_QUADS);{
-		glVertex3f( a, a,2);
-		glVertex3f( a,-a,2);
-		glVertex3f(-a,-a,2);
-		glVertex3f(-a, a,2);
+		glVertex3f( a, a,0);
+		glVertex3f( a,-a,0);
+		glVertex3f(-a,-a,0);
+		glVertex3f(-a, a,0);
 	}glEnd();
 }
 
@@ -113,6 +113,7 @@ void drawOneForthCylinder(double radius,double height,int segments)
         points[i].x=radius*cos(((double)i/(double)segments)*0.5*pi);
         points[i].y=radius*sin(((double)i/(double)segments)*0.5*pi);
     }
+    glColor3f(0,1,0);
     //draw segments using generated points
     for(i=0;i<segments;i++)
     {
@@ -214,6 +215,7 @@ void drawOneEighthSphere(double radius,int slices,int stacks,int isUpper)
 			points[i][j].z=h;
 		}
 	}
+	//glColor3f(1,1,0);
 	//draw quads using generated points
 	for(i=0;i<stacks;i++)
 	{
@@ -319,7 +321,6 @@ void drawAllCylinder()
 
     //x, y er dike translate lagbe, z er dike lagbe na.
 
-
     glPushMatrix();
     glTranslatef(t,t,0);
     drawOneForthCylinder(r,height,segments);
@@ -420,8 +421,40 @@ void drawAllCylinder()
 
 void drawAllSquare()
 {
-    glPushMatrix();
+    int t = a;
 
+    glPushMatrix();
+    glTranslatef(a+r,0,0);
+    glRotatef(90,0,1,0);
+    drawSquare(a);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-(a+r),0,0);
+    glRotatef(90,0,1,0);
+    drawSquare(a);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0,a+r,0);
+    glRotatef(90,1,0,0);
+    drawSquare(a);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0,-(a+r),0);
+    glRotatef(90,1,0,0);
+    drawSquare(a);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0,0,a+r);
+    drawSquare(a);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0,0,-(a+r));
+    drawSquare(a);
     glPopMatrix();
 }
 
