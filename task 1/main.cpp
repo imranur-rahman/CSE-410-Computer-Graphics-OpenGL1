@@ -14,7 +14,7 @@ int drawaxes;
 double angle;
 
 const float max_a = 40.0;
-float r = 0.0;
+float rad = 0.0;
 float a = max_a;
 float amountToBeIncreased = 0.4;
 
@@ -22,6 +22,8 @@ struct point
 {
 	double x,y,z;
 };
+
+point pos, u, r, l;
 
 
 void drawAxes()
@@ -285,25 +287,25 @@ void drawAllSphere()
     {
         glPushMatrix();
         glTranslatef(t,t,isLower*t); //isLower er jaygay - chilo
-        drawOneEighthSphere(r,slices,stacks,isLower);
+        drawOneEighthSphere(rad,slices,stacks,isLower);
         glPopMatrix();
 
         glPushMatrix();
         glTranslatef(t,-t,isLower*t);
         glRotatef(-rot,0,0,1);
-        drawOneEighthSphere(r,slices,stacks,isLower);
+        drawOneEighthSphere(rad,slices,stacks,isLower);
         glPopMatrix();
 
         glPushMatrix();
         glTranslatef(-t,-t,isLower*t);
         glRotatef(-2*rot,0,0,1);
-        drawOneEighthSphere(r,slices,stacks,isLower);
+        drawOneEighthSphere(rad,slices,stacks,isLower);
         glPopMatrix();
 
         glPushMatrix();
         glTranslatef(-t,t,isLower*t);
         glRotatef(-3*rot,0,0,1);
-        drawOneEighthSphere(r,slices,stacks,isLower);
+        drawOneEighthSphere(rad,slices,stacks,isLower);
         glPopMatrix();
     }
 
@@ -323,25 +325,25 @@ void drawAllCylinder()
 
     glPushMatrix();
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
     glTranslatef(t,-t,0);
     glRotatef(-rot,0,0,1);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
     glTranslatef(-t,-t,0);
     glRotatef(-2*rot,0,0,1);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
     glTranslatef(-t,t,0);
     glRotatef(-3*rot,0,0,1);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
 
@@ -351,7 +353,7 @@ void drawAllCylinder()
     glRotatef(90,1,0,0);
     glRotatef(-45,0,0,1);
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
@@ -360,7 +362,7 @@ void drawAllCylinder()
     glRotatef(90,1,0,0);
     glRotatef(-45,0,0,1);
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
@@ -369,7 +371,7 @@ void drawAllCylinder()
     glRotatef(90,1,0,0);
     glRotatef(-45,0,0,1);
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
@@ -378,7 +380,7 @@ void drawAllCylinder()
     glRotatef(90,1,0,0);
     glRotatef(-45,0,0,1);
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
 
@@ -387,7 +389,7 @@ void drawAllCylinder()
     glRotatef(90,1,0,0);
     glRotatef(-45,0,0,1);
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
@@ -396,7 +398,7 @@ void drawAllCylinder()
     glRotatef(90,1,0,0);
     glRotatef(-45,0,0,1);
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
@@ -405,7 +407,7 @@ void drawAllCylinder()
     glRotatef(90,1,0,0);
     glRotatef(-45,0,0,1);
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
     glPushMatrix();
@@ -414,7 +416,7 @@ void drawAllCylinder()
     glRotatef(90,1,0,0);
     glRotatef(-45,0,0,1);
     glTranslatef(t,t,0);
-    drawOneForthCylinder(r,height,segments);
+    drawOneForthCylinder(rad,height,segments);
     glPopMatrix();
 
 }
@@ -424,36 +426,36 @@ void drawAllSquare()
     int t = a;
 
     glPushMatrix();
-    glTranslatef(a+r,0,0);
+    glTranslatef(a+rad,0,0);
     glRotatef(90,0,1,0);
     drawSquare(a);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(-(a+r),0,0);
+    glTranslatef(-(a+rad),0,0);
     glRotatef(90,0,1,0);
     drawSquare(a);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(0,a+r,0);
+    glTranslatef(0,a+rad,0);
     glRotatef(90,1,0,0);
     drawSquare(a);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(0,-(a+r),0);
+    glTranslatef(0,-(a+rad),0);
     glRotatef(90,1,0,0);
     drawSquare(a);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(0,0,a+r);
+    glTranslatef(0,0,a+rad);
     drawSquare(a);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(0,0,-(a+r));
+    glTranslatef(0,0,-(a+rad));
     drawSquare(a);
     glPopMatrix();
 }
@@ -465,38 +467,131 @@ void drawMixture()
     drawAllSquare();
 }
 
+point crossProduct(point a, point b)
+{
+    point ret;
+    ret.x = a.y * b.z - a.z * b.y;
+    ret.y = a.z * b.x - a.x * b.z;
+    ret.z = a.x * b.y - a.y * b.x;
+    return ret;
+}
+
+void update(point *toupdate, point *by, double angle)
+{
+    toupdate->x = toupdate->x * cos(angle) + by->x * sin(angle);
+    toupdate->y = toupdate->y * cos(angle) + by->y * sin(angle);
+    toupdate->z = toupdate->z * cos(angle) + by->z * sin(angle);
+}
+
+
+point t1, t2;
+
 void keyboardListener(unsigned char key, int x,int y){
 	switch(key){
 
 		case '1':
-			drawgrid=1-drawgrid;
-			break;
+			t1 = crossProduct(u, l);
+			t2 = crossProduct(u, r);
 
+//			l.x = l.x * cos(pi/60.0) + t1.x * sin(pi/60.0);
+//			l.y = l.y * cos(pi/60.0) + t1.y * sin(pi/60.0);
+//			l.z = l.z * cos(pi/60.0) + t1.z * sin(pi/60.0);
+//
+//			r.x = r.x * cos(pi/60.0) + t2.x * sin(pi/60.0);
+//			r.y = r.y * cos(pi/60.0) + t2.y * sin(pi/60.0);
+//			r.z = r.z * cos(pi/60.0) + t2.z * sin(pi/60.0);
+
+            update(&l, &t1, pi/60.0);
+            update(&r, &t2, pi/60.0);
+
+			break;
+        case '2':
+            t1 = crossProduct(u, l);
+			t2 = crossProduct(u, r);
+			update(&l, &t1, -pi/60.0);
+            update(&r, &t2, -pi/60.0);
+            break;
+        case '3':
+            t1 = crossProduct(r, l);
+			t2 = crossProduct(r, u);
+			update(&l, &t1, pi/60.0);
+            update(&u, &t2, pi/60.0);
+            break;
+        case '4':
+            t1 = crossProduct(r, l);
+			t2 = crossProduct(r, u);
+			update(&l, &t1, -pi/60.0);
+            update(&u, &t2, -pi/60.0);
+            break;
+        case '5':
+            t1 = crossProduct(l, u);
+			t2 = crossProduct(l, r);
+			update(&u, &t1, pi/60.0);
+            update(&r, &t2, pi/60.0);
+            break;
+        case '6':
+            t1 = crossProduct(l, u);
+			t2 = crossProduct(l, r);
+			update(&u, &t1, -pi/60.0);
+            update(&r, &t2, -pi/60.0);
+            break;
 		default:
 			break;
 	}
 }
+
+double f1 = 5.0;
 
 
 void specialKeyListener(int key, int x,int y){
 	switch(key){
 		case GLUT_KEY_DOWN:		//down arrow key
 			cameraHeight -= 3.0;
+
+			pos.x = pos.x - l.x * f1;
+			pos.y = pos.y - l.y * f1;
+			pos.z = pos.z - l.z * f1;
+
 			break;
 		case GLUT_KEY_UP:		// up arrow key
 			cameraHeight += 3.0;
+
+			pos.x = pos.x + l.x * f1;
+			pos.y = pos.y + l.y * f1;
+			pos.z = pos.z + l.z * f1;
+
 			break;
 
 		case GLUT_KEY_RIGHT:
 			cameraAngle += 0.03;
+
+            pos.x = pos.x + r.x * f1;
+			pos.y = pos.y + r.y * f1;
+			pos.z = pos.z + r.z * f1;
+
 			break;
 		case GLUT_KEY_LEFT:
 			cameraAngle -= 0.03;
+
+			pos.x = pos.x - r.x * f1;
+			pos.y = pos.y - r.y * f1;
+			pos.z = pos.z - r.z * f1;
+
 			break;
 
 		case GLUT_KEY_PAGE_UP:
+
+		    pos.x = pos.x + u.x * f1;
+			pos.y = pos.y + u.y * f1;
+			pos.z = pos.z + u.z * f1;
+
 			break;
 		case GLUT_KEY_PAGE_DOWN:
+
+		    pos.x = pos.x - u.x * f1;
+			pos.y = pos.y - u.y * f1;
+			pos.z = pos.z - u.z * f1;
+
 			break;
 
 		case GLUT_KEY_INSERT:
@@ -506,14 +601,14 @@ void specialKeyListener(int key, int x,int y){
 		    if(a < max_a - amountToBeIncreased)
             {
                 a += amountToBeIncreased;
-                r -= amountToBeIncreased;
+                rad -= amountToBeIncreased;
             }
 			break;
 		case GLUT_KEY_END:
 		    //if(2 * r < max_a)
 		    if(a > amountToBeIncreased)
             {
-                r += amountToBeIncreased;
+                rad += amountToBeIncreased;
                 a -= amountToBeIncreased;
             }
 			break;
@@ -569,8 +664,10 @@ void display(){
 	//3. Which direction is the camera's UP direction?
 
 	//gluLookAt(100,100,100,	0,0,0,	0,0,1);
-	gluLookAt(200*cos(cameraAngle), 200*sin(cameraAngle), cameraHeight,		0,0,0,		0,0,1);
+	//gluLookAt(200*cos(cameraAngle), 200*sin(cameraAngle), cameraHeight,		0,0,0,		0,0,1);
 	//gluLookAt(0,0,200,	0,0,0,	0,1,0);
+
+	gluLookAt(pos.x, pos.y, pos.z, pos.x + l.x, pos.y + l.y, pos.z + l.z, u.x, u.y, u.z);
 
 
 	//again select MODEL-VIEW
@@ -616,6 +713,11 @@ void init(){
 	cameraHeight=150.0;
 	cameraAngle=1.0;
 	angle=0;
+
+	u = {0,0,1};
+	r = {-1.0/sqrt(2), 1.0/sqrt(2), 0};
+	l = {-1.0/sqrt(2), -1.0/sqrt(2), 0};
+	pos = {100,100,0};
 
 	//clear the screen
 	glClearColor(0,0,0,0);

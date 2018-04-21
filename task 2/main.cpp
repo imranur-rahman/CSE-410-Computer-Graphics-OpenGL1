@@ -267,7 +267,7 @@ void specialKeyListener(int key, int x,int y){
 		case GLUT_KEY_RIGHT:
 			cameraAngle += 0.03;
 
-            v.x = v.x * cos(pi/60) - v.y * sin(pi/60);
+            v.x = v.x * cos(pi/60.0) - v.y * sin(pi/60.0);
             v.y = v.y * cos(pi/60.0) + v.x * sin(pi/60.0);
 
 			break;
